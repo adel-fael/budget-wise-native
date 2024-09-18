@@ -32,6 +32,15 @@ export default function TabLayout() {
           ),
         }}
       />
+      <Tabs.Screen
+        name="test"
+        options={{
+          title: 'Test',
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon name={focused ? 'fish' : 'fish-outline'} color={color} />
+          ),
+        }}
+      />
     </Tabs>
   );
 }

@@ -17,7 +17,9 @@ export default function HomeScreen() {
       }
     >
       <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome! dfdfdf</ThemedText>
+        <ThemedText type="title">
+          Welcome! Adel is the best frontend developer
+        </ThemedText>
         <HelloWave />
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
