@@ -2,19 +2,22 @@ import {
   Image,
   StyleSheet,
   Platform,
-  Switch,
   TouchableOpacity,
   View,
+  Text,
 } from 'react-native';
 
 import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useColorScheme } from 'nativewind';
 import { ThemedText } from '@/components/ThemedText';
+import { useCounter } from '@/store/useCounter';
 
 export default function HomeScreen() {
   const { toggleColorScheme, colorScheme } = useColorScheme();
+  const inc = useCounter((state) => state.inc);
+  const count = useCounter((state) => state.count);
+
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
@@ -25,27 +28,38 @@ export default function HomeScreen() {
         />
       }
     >
-      <View>
-        <ThemedText>{colorScheme}</ThemedText>
-        <GestureHandlerRootView>
-          <Switch
-            trackColor={{ false: '#767577', true: '#81b0ff' }}
-            thumbColor={colorScheme === 'dark' ? '#f5dd4b' : '#f4f3f4'}
-            ios_backgroundColor="#3e3e3e"
-            value={colorScheme === 'dark'}
-            onChange={toggleColorScheme}
-          />
-        </GestureHandlerRootView>
-      </View>
-      <View>
-        <TouchableOpacity onPress={() => toggleColorScheme()}>
-          <ThemedText>{colorScheme}</ThemedText>
+      <View className="flex-1 items-center justify-center ">
+        <TouchableOpacity
+          onPress={() => toggleColorScheme()}
+          className="bg-[#292929] border-2 border-[#3e3e3e] rounded-lg px-6 py-3 text-base hover:border-[#fff] cursor-pointer transition"
+        >
+          <Text className="text-white">{colorScheme}</Text>
         </TouchableOpacity>
       </View>
+
       <View style={styles.titleContainer}>
-        <ThemedText className='text-4xl'>Welcome! Adel is the best frontend developer</ThemedText>
+        <ThemedText className="text-3xl">
+          Welcome! Adel is the best frontend developer
+        </ThemedText>
         <HelloWave />
       </View>
+
+      <View>
+        <ThemedText className="text-2xl text-red-400 dark:text-red-600">
+          Counter:
+        </ThemedText>
+      </View>
+
+      <View className="flex-1 items-start justify-center ">
+        <TouchableOpacity
+          onPress={() => inc()}
+          className="inline-block py-4 text-xl text-white bg-gray-800 dark:bg-gray-200 px-7 hover:bg-gray-700 rounded-xl
+"
+        >
+          <Text className="text-white dark:text-black">{count}</Text>
+        </TouchableOpacity>
+      </View>
+
       <View style={styles.stepContainer}>
         <ThemedText className="themedThemedText-sm">Step 1: Try it</ThemedText>
         <ThemedText>
