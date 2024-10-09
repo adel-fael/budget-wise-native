@@ -1,6 +1,6 @@
 
 
-### Ali do this before `Get started`
+### Do this first
    ```bash
     nvm use v20.17.0
    ```

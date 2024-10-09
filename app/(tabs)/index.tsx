@@ -1,11 +1,20 @@
-import { Image, StyleSheet, Platform } from 'react-native';
+import {
+  Image,
+  StyleSheet,
+  Platform,
+  Switch,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
 import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { useColorScheme } from 'nativewind';
 import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
 
 export default function HomeScreen() {
+  const { toggleColorScheme, colorScheme } = useColorScheme();
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
@@ -16,42 +25,72 @@ export default function HomeScreen() {
         />
       }
     >
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">
-          Welcome! Adel is the best frontend developer
-        </ThemedText>
+      <View>
+        <ThemedText>{colorScheme}</ThemedText>
+        <GestureHandlerRootView>
+          <Switch
+            trackColor={{ false: '#767577', true: '#81b0ff' }}
+            thumbColor={colorScheme === 'dark' ? '#f5dd4b' : '#f4f3f4'}
+            ios_backgroundColor="#3e3e3e"
+            value={colorScheme === 'dark'}
+            onChange={toggleColorScheme}
+          />
+        </GestureHandlerRootView>
+      </View>
+      <View>
+        <TouchableOpacity onPress={() => toggleColorScheme()}>
+          <ThemedText>{colorScheme}</ThemedText>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.titleContainer}>
+        <ThemedText className='text-4xl'>Welcome! Adel is the best frontend developer</ThemedText>
         <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
+      </View>
+      <View style={styles.stepContainer}>
+        <ThemedText className="themedThemedText-sm">Step 1: Try it</ThemedText>
         <ThemedText>
           Edit{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText>{' '}
+          <ThemedText className="font-semibold themedThemedText-lg">
+            app/(tabs)/index.tsx
+          </ThemedText>{' '}
           to see changes. Press{' '}
-          <ThemedText type="defaultSemiBold">
+          <ThemedText className="font-semibold themedThemedText-lg">
             {Platform.select({ ios: 'cmd + d', android: 'cmd + m' })}
           </ThemedText>{' '}
           to open developer tools.
         </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
+      </View>
+      <View style={styles.stepContainer}>
+        <ThemedText className="themedThemedText-sm">Step 2: Explore</ThemedText>
         <ThemedText>
           Tap the Explore tab to learn more about what's included in this
           starter app.
         </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
+      </View>
+      <View style={styles.stepContainer}>
+        <ThemedText className="themedThemedText-sm">
+          Step 3: Get a fresh start
+        </ThemedText>
         <ThemedText>
           When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText>{' '}
-          to get a fresh <ThemedText type="defaultSemiBold">app</ThemedText>{' '}
+          <ThemedText className="font-semibold themedThemedText-lg">
+            npm run reset-project
+          </ThemedText>{' '}
+          to get a fresh{' '}
+          <ThemedText className="font-semibold themedThemedText-lg">
+            app
+          </ThemedText>{' '}
           directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
+          <ThemedText className="font-semibold themedThemedText-lg">
+            app
+          </ThemedText>{' '}
+          to{' '}
+          <ThemedText className="font-semibold themedThemedText-lg">
+            app-example
+          </ThemedText>
+          .
         </ThemedText>
-      </ThemedView>
+      </View>
     </ParallaxScrollView>
   );
 }
